@@ -1,3 +1,4 @@
+
 # NFC
 다음 2개 파일 설치
  - [NFC TagInfo](https://play.google.com/store/apps/details?id=at.mroland.android.apps.nfctaginfo)
@@ -5,7 +6,7 @@
 
 **Tag**
 
-코일로 감긴 140 byte 정도의 메모리가 있음.
+코일로 감긴 140 byte 정도의 메모리가 있음.(500번 정도 read/write 가능)
 Tagging으로 특정 action 바로 실행 가능.
 
 **P2P**
@@ -15,9 +16,15 @@ Google - Android Beam(magic sharing)
  -- Bluetooth 페어링 + 전송
  - Wi-Fi direct 추가하려고 했으나 OEM에서 이미 자체 기능으로 집어 넣음.
  -- LG는 Smart Direct
- - 
+ 
+## NFC tag 인식과 intent 처리
+※ http://chiyo85.tistory.com/70
+
 
 
 
 **NFC Project1 - Read/Write**
+
+NFC 태그 인식과 인텐트 처리
+
 
