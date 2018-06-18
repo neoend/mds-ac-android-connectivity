@@ -23,8 +23,10 @@ Google - Android Beam(magic sharing)
 
 
 
-**NFC Project1 - Read/Write**
+**NFC Project**
 
-NFC 태그 인식과 인텐트 처리
+ - [NfcReader](https://github.com/neoend/mds-android-connectivity/tree/master/NFC/NfcReader)
+
+
 
 
