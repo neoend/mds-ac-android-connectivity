@@ -1,4 +1,6 @@
 
+
+
 # NFC
 다음 2개 파일 설치
  - [NFC TagInfo](https://play.google.com/store/apps/details?id=at.mroland.android.apps.nfctaginfo)
@@ -21,12 +23,23 @@ Google - Android Beam(magic sharing)
 ※ http://chiyo85.tistory.com/70
 
 
+Test project 1: **[NfcReader](https://github.com/neoend/mds-android-connectivity/tree/master/NFC/NfcReader)**
 
-
-**NFC Project**
-
- - [NfcReader](https://github.com/neoend/mds-android-connectivity/tree/master/NFC/NfcReader)
-
-
-
+~~~xml
+<activity android:name=".MainActivity">
+  <intent-filter>
+    <action android:name="android.intent.action.MAIN" />
+    <category android:name="android.intent.category.LAUNCHER" />
+  </intent-filter>
+  <intent-filter>
+    <action android:name="android.nfc.action.NDEF_DISCOVERED" />
+    <category android:name="android.intent.category.DEFAULT" />
+    <data android:mimeType="text/plain" />
+  </intent-filter>
+</activity>
+~~~
+ - 여러 개의 intent-fileter가 들어갈 수 있다.
+   - android.nfc.action.NDEF_DISCOVERED
+   - android.nfc.action.TECH_DISCOVERED
+   - android.nfc.action.TAG_DISCOVERED
 
