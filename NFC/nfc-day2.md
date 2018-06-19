@@ -31,6 +31,26 @@ protected void onPause() {
 p.47
  - enableForegroundDispatch(activity, intent, filters, techLists)
  - disableForegroundDispatch(activity)
+
+~~~java
+// 1. get NFC Adapter
+NfcAdapter nfcAdapter = NfcAdapter.getDefaultAdapter(this);
+
+// 2. Detecting Tag
+IntentFilter ndefTagFilter = new IntentFilter(NfcAdapter.ACTION_TAG_DISCOVERED);
+ndefTagFilter.addDataType("text/plain");
+// 여러개의 필터 추가 가능.
+IntentFilter[] filters = new IntentFilter[]{ndefTagFilter };
+
+// 3. Tag 인식한 후 처리할 Intent 생성
+Intent intent = new Intent(this, this.getClass()); // 직접 처리
+intent.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
+PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, intent, 0);
+
+// 4. onResume에서 등록
+nfcAdapter.enableForegroundDispatch(this, pendingIntent, filters, null);
+~~~
+
  
  ## [NFC Writer](https://github.com/neoend/mds-android-connectivity/tree/master/NFC/NfcTagWriter)
 
