@@ -38,11 +38,13 @@ public class MainActivity extends AppCompatActivity {
         Intent i = new Intent(this, this.getClass()); // 내가 직접 처리하겠다.
         i.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
         pIntent = PendingIntent.getActivity(this, 0, i, 0);
+        /*
         // 태그될때 어떤 태그를 처리할 것인가
         IntentFilter filterText = new IntentFilter(NfcAdapter.ACTION_NDEF_DISCOVERED);
         IntentFilter filterUri = new IntentFilter(NfcAdapter.ACTION_NDEF_DISCOVERED);
         IntentFilter filterUri2 = new IntentFilter(NfcAdapter.ACTION_NDEF_DISCOVERED);
         try {
+            //TODO filter 하나에 여러개의 datatype or scheme 추가 안됨?
             filterText.addDataType("text/plain");
             filterUri.addDataScheme("http");
             filterUri2.addDataScheme("https");
@@ -50,6 +52,10 @@ public class MainActivity extends AppCompatActivity {
             e.printStackTrace();
         }
         filters = new IntentFilter[]{filterText, filterUri, filterUri2};
+        */
+
+        IntentFilter ndefTag = new IntentFilter(NfcAdapter.ACTION_TAG_DISCOVERED);
+        filters = new IntentFilter[]{ndefTag};
     }
 
     @Override
@@ -67,9 +73,10 @@ public class MainActivity extends AppCompatActivity {
 
     private void processIntent(Intent intent) {
         String action = intent.getAction();
-        infoTv.setText("action : " + action);
 
-        if ("android.nfc.action.NDEF_DISCOVERED".equals(intent.getAction())) {
+        if (NfcAdapter.ACTION_NDEF_DISCOVERED.equals(intent.getAction()) ||
+                NfcAdapter.ACTION_TECH_DISCOVERED.equals(intent.getAction()) ||
+                NfcAdapter.ACTION_TAG_DISCOVERED.equals(intent.getAction())) {
             Parcelable[] rawData = intent.getParcelableArrayExtra(NfcAdapter.EXTRA_NDEF_MESSAGES);
             // 1st Message ; 일반적으로 메시지는 하나만 사용
             NdefMessage ndefMsg = (NdefMessage) rawData[0];
@@ -87,19 +94,25 @@ public class MainActivity extends AppCompatActivity {
             switch (type.charAt(0)) {
                 case 'T':
                     strData = new String(realData, 3, realData.length -3);
+                    infoTv.setText("text : " + strData);
                     break;
                 case 'U':
                     //strData = new String(realData);
                     Uri uri = record.toUri();
                     strData = uri.toString();
-                    Intent i = new Intent(Intent.ACTION_VIEW, uri);
-                    startActivity(i);
+                    infoTv.setText("uri : " + strData);
+                    //Intent i = new Intent(Intent.ACTION_VIEW, uri);
+                    //startActivity(i);
                     break;
                 default:
                     // unknown type
+                    strData = new String(realData);
+                    infoTv.setText("data: " + strData);
                     break;
             }
         }
+
+
     }
 
     @Override
