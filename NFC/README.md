@@ -1,7 +1,7 @@
 
 
 
-# NFC
+# [NFC](https://developer.android.com/guide/topics/connectivity/nfc/)
 다음 2개 파일 설치
  - [NFC TagInfo](https://play.google.com/store/apps/details?id=at.mroland.android.apps.nfctaginfo)
  - [NFC TagWriter by NXP](https://play.google.com/store/apps/details?id=com.nxp.nfc.tagwriter)
@@ -22,6 +22,10 @@ Google - Android Beam(magic sharing)
 ## NFC tag 인식과 intent 처리
 ※ http://chiyo85.tistory.com/70
 
+ - 여러 개의 intent-fileter가 들어갈 수 있다.
+   - android.nfc.action.NDEF_DISCOVERED : NfcReader example ; 주로 읽기 위주
+   - android.nfc.action.TECH_DISCOVERED : p.46
+   - android.nfc.action.TAG_DISCOVERED : 쓰기 
 
 Test project 1: **[NfcReader](https://github.com/neoend/mds-android-connectivity/tree/master/NFC/NfcReader)**
 
@@ -38,8 +42,4 @@ Test project 1: **[NfcReader](https://github.com/neoend/mds-android-connectivity
   </intent-filter>
 </activity>
 ~~~
- - 여러 개의 intent-fileter가 들어갈 수 있다.
-   - android.nfc.action.NDEF_DISCOVERED
-   - android.nfc.action.TECH_DISCOVERED
-   - android.nfc.action.TAG_DISCOVERED
 
