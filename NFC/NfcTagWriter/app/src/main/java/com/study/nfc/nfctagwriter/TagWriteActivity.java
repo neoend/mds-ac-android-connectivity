@@ -11,6 +11,7 @@ import android.nfc.Tag;
 import android.nfc.tech.Ndef;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -56,12 +57,14 @@ public class TagWriteActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
+        Log.i("nfc", "onResume()");
         nfcAdapter.enableForegroundDispatch(this, pendingIntent, filters, null);
     }
 
     @Override
     protected void onNewIntent(Intent intent) {
         super.onNewIntent(intent);
+        Log.i("nfc", "onNewIntent()");
         desc.setText("Tag detected~~!");
         // intent 에서 Tag 객체 구해서 Write
         Tag tag = intent.getParcelableExtra(NfcAdapter.EXTRA_TAG);
@@ -80,6 +83,7 @@ public class TagWriteActivity extends AppCompatActivity {
     @Override
     protected void onPause() {
         super.onPause();
+        Log.i("nfc", "onPause()");
         nfcAdapter.disableForegroundDispatch(this);
     }
 
@@ -105,18 +109,27 @@ public class TagWriteActivity extends AppCompatActivity {
         Ndef ndef = Ndef.get(detectedTag);
         try {
             ndef.connect();
+            if (ndef.isWritable()) {
+                int tagSize = ndef.getMaxSize();
+                int realData = msg.getByteArrayLength();
+                if (realData > tagSize) {
+                    Toast.makeText(this, "용량 초과", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                Toast.makeText(this, "쓰기 시작", Toast.LENGTH_SHORT).show();
+                try {
+                    ndef.writeNdefMessage(msg);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                } catch (FormatException e) {
+                    e.printStackTrace();
+                }
+                Toast.makeText(this, "쓰기 완료", Toast.LENGTH_SHORT).show();
+            } else {
+                desc.setText("Doesn't write");
+            }
         } catch (IOException e) {
             e.printStackTrace();
-        }
-
-        if (ndef.isWritable()) {
-            try {
-                ndef.writeNdefMessage(msg);
-            } catch (IOException e) {
-                e.printStackTrace();
-            } catch (FormatException e) {
-                e.printStackTrace();
-            }
         }
     }
 }
