@@ -33,9 +33,16 @@ p.47
  - disableForegroundDispatch(activity)
  
  ## [NFC Writer](https://github.com/neoend/mds-android-connectivity/tree/master/NFC/NfcTagWriter)
+
  p.49 쓰기에 필요한 것은 **Ndef** 객체.
+~~~java
+// intent 에서 Tag 객체 구해서 Write  
+Tag tag = intent.getParcelableExtra(NfcAdapter.EXTRA_TAG);
+Ndef ndef = Ndef.get(tag);
+~~~
+
   - .connect()
-  - .writeNdefMessage() : data가 잘 써졌는지에 대한 검증은 직접 해야함.
+  - .writeNdefMessage(NdefMessage msg) : data가 잘 써졌는지에 대한 검증은 직접 해야함.
 
 1. 특정 type의 data 를 NdefRecord 생성.
 2. NdefRecord로 NdefMessage 생성.
