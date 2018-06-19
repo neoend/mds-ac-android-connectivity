@@ -1,5 +1,5 @@
 
-# Android Connectivity
+# [Android Connectivity](https://developer.android.com/guide/topics/connectivity/)
 
 수업에 필요한 [apk](https://github.com/neoend/mds-android-connectivity/tree/master/apk)
 
