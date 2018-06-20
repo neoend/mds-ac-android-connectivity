@@ -2,4 +2,29 @@
 
 ## [BLE GATT](https://www.bluetooth.com/ko-kr/specifications/gatt/generic-attributes-overview)
 ### [GATT 규격](https://www.bluetooth.com/ko-kr/specifications/gatt)
-
+03.BleControl
+1. 연결
+2. discoverServices() 무조건 호출해 줘야 함. 호출하지 않으면 BLE로 부터 data 얻어올 수 없음.
+3. sensor 활성화; 서비스의 characteristic = configuration p.84 참조
+~~~java
+BluetoothGattCharacteristic charistic = gatt.getService(sevUuid).getCharacteristic(confUuid);
+// 그냥 1은 정해진 상수.
+byte value = 1;
+byte[] val = new byte[1];
+val[0] = value;
+charistic.setValue(val);
+gatt.writeCharacteristic(charistic);
+~~~
+4. sensor에 대한 noti. 활성화
+5. CCCD switch ON => descriptor
+~~~java
+// descriptor 에 대한 UUID 00002902-0000-1000-8000-00805f9b34fb 은 표준으로 정해진 값.
+BluetoothGattDescriptor descriptor = c.getDescriptor(UUID.fromString("00002902-0000-1000-8000-00805f9b34fb"));
+if (descriptor != null) {
+  byte[] val = true ? BluetoothGattDescriptor.ENABLE_NOTIFICATION_VALUE
+      : BluetoothGattDescriptor.DISABLE_NOTIFICATION_VALUE;
+  // 그냥 val == 1 임.
+  descriptor.setValue(val);
+  gatt.writeDescriptor(descriptor);
+}
+~~~
