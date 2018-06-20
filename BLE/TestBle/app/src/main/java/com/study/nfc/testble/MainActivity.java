@@ -129,6 +129,7 @@ public class MainActivity extends AppCompatActivity {
                 Log.i("ble", "conection complete with sensor");
                 showMessage("sensor 와 연결 완료");
                 // TODO 5. 연결되면 discover services 하면 아래 onServicesDiscovered() 가 콜백된다.
+                // TODO 이건 꼭 호출해야 함. 호출 하지 않으면 이후 과정이 동작하지 않음.
                 bluetoothGatt.discoverServices();
             } else if (newState == BluetoothProfile.STATE_DISCONNECTED) {
                 Log.i("ble", "Disconection complete with sensor");
