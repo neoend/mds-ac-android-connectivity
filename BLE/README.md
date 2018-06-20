@@ -16,6 +16,10 @@ charistic.setValue(val);
 gatt.writeCharacteristic(charistic);
 ~~~
 4. sensor에 대한 noti. 활성화
+~~~java
+BluetoothGattCharacteristic characteristic = gatt.getService(UUID_IRT_SERV).getCharacteristic(UUID_IRT_DATA);
+gatt.setCharacteristicNotification(characteristic, true);
+~~~
 5. CCCD switch ON => descriptor
 ~~~java
 // descriptor 에 대한 UUID 00002902-0000-1000-8000-00805f9b34fb 은 표준으로 정해진 값.
