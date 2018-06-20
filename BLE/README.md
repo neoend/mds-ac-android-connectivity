@@ -20,7 +20,7 @@ gatt.writeCharacteristic(charistic);
 BluetoothGattCharacteristic characteristic = gatt.getService(UUID_IRT_SERV).getCharacteristic(UUID_IRT_DATA);
 gatt.setCharacteristicNotification(characteristic, true);
 ~~~
-5. CCCD switch ON => descriptor
+5. CCCD(Client Characteristic Configuration Descriptor) switch ON? => data characteristic의 descriptor에 1로 
 ~~~java
 // descriptor 에 대한 UUID 00002902-0000-1000-8000-00805f9b34fb 은 표준으로 정해진 값.
 BluetoothGattDescriptor descriptor = characteristic.getDescriptor(UUID.fromString("00002902-0000-1000-8000-00805f9b34fb"));
