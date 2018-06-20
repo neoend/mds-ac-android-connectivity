@@ -7,7 +7,7 @@
 2. discoverServices() 무조건 호출해 줘야 함. 호출하지 않으면 BLE로 부터 data 얻어올 수 없음.
 3. sensor 활성화; 서비스의 characteristic = configuration p.84 참조
 ~~~java
-BluetoothGattCharacteristic charistic = gatt.getService(sevUuid).getCharacteristic(confUuid);
+BluetoothGattCharacteristic charistic = gatt.getService(UUID_IRT_SERV).getCharacteristic(UUID_IRT_CONF);
 // 그냥 1은 정해진 상수.
 byte value = 1;
 byte[] val = new byte[1];
