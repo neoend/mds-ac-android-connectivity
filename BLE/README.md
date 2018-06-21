@@ -25,10 +25,7 @@ gatt.setCharacteristicNotification(characteristic, true);
 // descriptor 에 대한 UUID 00002902-0000-1000-8000-00805f9b34fb 은 표준으로 정해진 값.
 BluetoothGattDescriptor descriptor = characteristic.getDescriptor(UUID.fromString("00002902-0000-1000-8000-00805f9b34fb"));
 if (descriptor != null) {
-  byte[] val = true ? BluetoothGattDescriptor.ENABLE_NOTIFICATION_VALUE
-      : BluetoothGattDescriptor.DISABLE_NOTIFICATION_VALUE;
-  // 그냥 val == 1 임.
-  descriptor.setValue(val);
+  descriptor.setValue(BluetoothGattDescriptor.ENABLE_NOTIFICATION_VALUE); // byte[] 임.
   gatt.writeDescriptor(descriptor);
 }
 ~~~
