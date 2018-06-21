@@ -2,7 +2,10 @@
 
 ## [BLE GATT](https://www.bluetooth.com/ko-kr/specifications/gatt/generic-attributes-overview)
 ### [GATT 규격](https://www.bluetooth.com/ko-kr/specifications/gatt)
-03.BleControl
+03.BleControl 강의 예제 참조
+
+[구글링 예제](https://medium.com/@avigezerit/bluetooth-low-energy-on-android-22bc7310387a)
+
 1. 연결
 2. discoverServices() 무조건 호출해 줘야 함. 호출하지 않으면 BLE로 부터 data 얻어올 수 없음.
 3. sensor 활성화; 서비스의 characteristic = configuration p.84 참조
