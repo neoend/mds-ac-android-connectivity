@@ -1,34 +1,8 @@
-# FCM (Firebase Cloud Messaging)
+# Wi-Fi Direct; [Wi-Fi P2P](https://developer.android.com/guide/topics/connectivity/wifip2p)
 
-## 이건 2단계 제목
+### WifiP2pManager
 
-1. *기울게* 쓰기 **굵게** 쓰기
-1. 리스트 2
-
-### 3번째 제목
-
-~~~java
-import javax.xml;
-~~~
-
-> 인용문이다.
-
-~~~javascript
-function syntaxHighlight(code, lang) {
-   var foo = 'rhio';
-   var bar = 33;
-}
-~~~
-
-~~~java
-class Test {
-    public static void main(String[] args) {
-        System.out.pritnln("hello world");
-    }
-}
-~~~
-
-~~~xml
-<uses-permission android:name="android.permission.INTERNET" />
-<uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-~~~
+1. initialize()
+2. discoverPeer() : 장치를 찾으면 broadcast 날아옴.
+3. 2번에서 보낸 인텐트 받아서 requestPeers() 하면서 PeerListListener() 등록
+4. connect()
