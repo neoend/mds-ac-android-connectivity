@@ -8,7 +8,7 @@
 3. sensor 활성화; 서비스의 characteristic = configuration p.84 참조
 ~~~java
 BluetoothGattCharacteristic charistic = gatt.getService(UUID_IRT_SERV).getCharacteristic(UUID_IRT_CONF);
-// 그냥 1은 정해진 상수.
+// 이 값은 vendor 에서 정하는 규격이다. vendor 마다 달라짐.
 byte value = 1;
 byte[] val = new byte[1];
 val[0] = value;
