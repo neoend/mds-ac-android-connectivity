@@ -29,7 +29,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         infoText = findViewById(R.id.info);
-        // 64:6C:AB:5C:F0:36
+        // 가상의 mac addr 을 생성하여 사용하고, 실행할때마다 변경됨.
         infoText.setText("80:5A:04:0D:A2:BA");
 
         // 퍼미션 체크
