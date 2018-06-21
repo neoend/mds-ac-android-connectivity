@@ -10,6 +10,8 @@ WifiDirectDemo 참고. [구글 설명](https://developer.android.com/training/co
 3. 2번에서 보낸 인텐트 받아서 requestPeers() 하면서 PeerListListener() 등록
 4. connect()
 
+[예제](http://hamait.tistory.com/302?category=128266)
+
 [예제1](http://codesunsoo.blogspot.com/2015/05/android-wifi-directwifi-peer-2-peer.html)
 
 [안드로이드 와이파이 다이렉트(WI-FI Direct) 프로그래밍](http://hamait.tistory.com/300)
