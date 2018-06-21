@@ -7,6 +7,9 @@ import android.bluetooth.BluetoothGattCallback;
 import android.bluetooth.BluetoothGattCharacteristic;
 import android.bluetooth.BluetoothGattDescriptor;
 import android.bluetooth.BluetoothProfile;
+import android.bluetooth.le.BluetoothLeScanner;
+import android.bluetooth.le.ScanCallback;
+import android.bluetooth.le.ScanResult;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -15,6 +18,7 @@ import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.util.List;
 import java.util.UUID;
 
 public class MainActivity extends AppCompatActivity {
@@ -26,6 +30,7 @@ public class MainActivity extends AppCompatActivity {
     UUID UUID_DESCRIPTOR = UUID.fromString("00002902-0000-1000-8000-00805f9b34fb");
 
     BluetoothAdapter bluetoothAdapter;
+    BluetoothLeScanner bluetoothLeScanner;
     BluetoothDevice bluetoothDevice;
     BluetoothGatt bluetoothGatt;
     TextView infoTv;
@@ -56,12 +61,37 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onPause() {
         super.onPause();
+        bluetoothAdapter.stopLeScan(leScanCallback);
+        if (bluetoothGatt != null) {
+            bluetoothGatt.disconnect();
+            bluetoothGatt.close();
+        }
     }
 
     public void scanStart(View view) {
         showMessage("Start scan...");
         bluetoothAdapter.startLeScan(leScanCallback);
+        // TODO deprecated!!!
+        //bluetoothLeScanner = bluetoothAdapter.getBluetoothLeScanner();
+        //bluetoothLeScanner.startScan(scanCallback);
     }
+    ScanCallback scanCallback = new ScanCallback() {
+        @Override
+        public void onScanResult(int callbackType, ScanResult result) {
+            super.onScanResult(callbackType, result);
+            // TODO
+        }
+
+        @Override
+        public void onBatchScanResults(List<ScanResult> results) {
+            super.onBatchScanResults(results);
+        }
+
+        @Override
+        public void onScanFailed(int errorCode) {
+            super.onScanFailed(errorCode);
+        }
+    };
 
     public void scanStop(View view) {
         showMessage("Stop scan...");
@@ -77,6 +107,7 @@ public class MainActivity extends AppCompatActivity {
     BluetoothAdapter.LeScanCallback leScanCallback = new BluetoothAdapter.LeScanCallback() {
         @Override
         public void onLeScan(BluetoothDevice device, int rssi, byte[] scanRecord) {
+            // TODO scanRecord 가 p.84 PDU 부분. mac addr, data 등등..
             if (mymac.equals(device.getAddress())) {
                 bluetoothDevice = device;
                 bluetoothAdapter.stopLeScan(leScanCallback);
